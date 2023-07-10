@@ -13,7 +13,7 @@ appBodegas.use((req, res, next) => {
         con = mysql.createPool({
             host: process.env.HOST,
             user: process.env.USUARIO,
-            pass: process.env.PASS,
+            password: process.env.PASSWORD,
             database: process.env.DATABASE,
             port: process.env.PORT
         })

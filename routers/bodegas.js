@@ -26,11 +26,11 @@ appBodegas.use((req, res, next) => {
 })
 
 //GET
-appBodegas.get("/bodegas",(req,res)=>{
-    con.query(`SELECT * FROM bodegas`,(err,data,fils)=>{
+appBodegas.get("/",(req,res)=>{
+    con.query(`SELECT * FROM bodegas ORDER BY nombre ASC`,(err,data,fils)=>{
         console.log(err);
         console.log(data);
-        console.log(fils);
+        res.status(200).send(data)
 
     })
 })

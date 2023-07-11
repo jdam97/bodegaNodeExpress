@@ -54,7 +54,4 @@ appBodegas.post("/",(req,res)=>{
 })
 
 
-
-
-
 export default appBodegas;

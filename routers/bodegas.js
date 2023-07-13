@@ -27,7 +27,7 @@ appBodegas.use((req, res, next) => {
 })
 
 //GET Punto 4
-appBodegas.get("/",DtoBodega,(req,res)=>{ // meto DTOBodega que es la verificacion
+appBodegas.get("/",(req,res)=>{ // meto DTOBodega que es la verificacion
     con.query(`SELECT * FROM bodegas ORDER BY nombre ASC`,(err,data,fils)=>{
         console.log(err);
         console.log(data);
@@ -38,7 +38,7 @@ appBodegas.get("/",DtoBodega,(req,res)=>{ // meto DTOBodega que es la verificaci
 
 //Punto 5
 
-appBodegas.post("/",(req,res)=>{
+appBodegas.post("/",DtoBodega,(req,res)=>{
     const {id, nombre, id_responsable, estado, update_by, created_at} = req.body //destructuring que me dice que lo que haya en el body con estos nombres, me los trtaiga como variables
     
     con.query(`INSERT INTO bodegas (id, nombre, id_responsable, estado, update_by, created_at) VALUES (?,?,?,?,?,?)`,

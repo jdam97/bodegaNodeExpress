@@ -30,23 +30,17 @@ appProductos.use((req,res,next)=>{
 //Get
 
 appProductos.get("/",(req,res)=>{
-    con.query(`SELECT * FROM productos ORDER BY nombre DESC`,
-    (error,data)=>{
-        try {
-            res.status(200).send(data)//para mostrar en el thunder
-            
-
-
-
-        } catch (error) {
-            
-            res.status(500).send("there aren't conection")
-        }
+    con.query(`
+    SELECT productos.*, SUM(inventarios.cantidad) AS Total FROM productos INNER JOIN inventarios ON productos.id = inventarios.id_producto GROUP BY productos.id ORDER BY Total DESC`,
+      (error,result)=>{
+        if(error){
+            console.log(error);
+            res.status(500).send("Connection error");
+        }else(
+            res.status(200).send(result)
+        )
     })
-
 });
-
-
 
 
 export default appProductos;

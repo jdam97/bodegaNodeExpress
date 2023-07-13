@@ -1,6 +1,7 @@
 import { Router } from "express";
 import mysql from "mysql2";
 import dotenv from "dotenv"
+import DtoBodega from "../middlewares/DTObodegas.js";
 dotenv.config() // para activar la configuracion
 
 const appBodegas = Router();
@@ -26,7 +27,7 @@ appBodegas.use((req, res, next) => {
 })
 
 //GET Punto 4
-appBodegas.get("/",(req,res)=>{
+appBodegas.get("/",DtoBodega,(req,res)=>{ // meto DTOBodega que es la verificacion
     con.query(`SELECT * FROM bodegas ORDER BY nombre ASC`,(err,data,fils)=>{
         console.log(err);
         console.log(data);

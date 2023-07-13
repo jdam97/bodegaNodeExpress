@@ -1,5 +1,8 @@
-import dotenv from "dotenv";
+import 'reflect-metadata';
+import { plainToClass } from 'class-transformer';
 import express from "express";
+import dotenv from "dotenv";
+
 import appBodegas from "./routers/bodegas.js"
 import appProductos from "./routers/productos.js"
 

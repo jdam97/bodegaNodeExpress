@@ -11,7 +11,7 @@ export class bodegas{
             throw {status:401, message: "ERROR en el id, dato no válido"}
         }
     })
-    ID:number //Debo ponerlos en este caso como los reciba de la base de datos
+    id:number //Debo ponerlos en este caso como los reciba de la base de datos
 
     @Expose({name:"nombre"})
     @Transform(({value})=>{
@@ -35,9 +35,9 @@ export class bodegas{
             throw {status:401, message: "ERROR en el id, dato no válido"}
         }
     })
-    IDNAME:number //Debo ponerlos en este caso como los reciba de la base de datos
+    id_responsable:number //Debo ponerlos en este caso como los reciba de la base de datos
 
-    @Expose({name:"state"})
+    @Expose({name:"estado"})
     @Transform(({value})=>{
         let data = /^[0-9]+$/g.test(value); // a la data le meto la expresion regular  /^[0-9]+$/g.  que  especifica que solo reciba numeros y le paso el valor
         if(data && typeof value == "number"){ // acá valido que sea data y tambien tiene que ser de tipo number
@@ -47,7 +47,7 @@ export class bodegas{
             throw {status:401, message: "ERROR en el estado, dato no válido"}
         }
     })
-    STATE:number //Debo ponerlos en este caso como los reciba de la base de datos
+    estado:number //Debo ponerlos en este caso como los reciba de la base de datos
 
     @Expose({name:"created_by"})
     @Transform(({value})=>{
@@ -59,14 +59,14 @@ export class bodegas{
             throw {status:401, message: "ERROR en el createdby, dato no válido"}
         }
     })
-    CREATEDBY:number //Debo ponerlos en este caso como los reciba de la base de datos
+    created_by:number //Debo ponerlos en este caso como los reciba de la base de datos
 
     constructor(id:number,nombre:string,id_responsable:number,estado:number,created_by:number){
-        this.ID = id;
+        this.id = id;
         this.nombre = nombre;
-        this.IDNAME = id_responsable;
-        this.STATE = estado;
-        this.CREATEDBY = created_by;
+        this.id_responsable = id_responsable;
+        this.estado = estado;
+        this.created_by = created_by;
     }
 
 

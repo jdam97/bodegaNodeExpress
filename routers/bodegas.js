@@ -45,6 +45,7 @@ appBodegas.post("/",DtoBodega,(req,res)=>{
     [id, nombre, id_responsable, estado, update_by, created_at],
     (err,data)=>{
         if(err){
+            console.log(err)
             res.status(500).send("Error ejecutando el query")
         }
         else if(data){

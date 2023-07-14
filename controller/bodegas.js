@@ -10,11 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Transform, Expose } from "class-transformer";
 export class bodegas {
     constructor(id, nombre, id_responsable, estado, created_by) {
-        this.ID = id;
+        this.id = id;
         this.nombre = nombre;
-        this.IDNAME = id_responsable;
-        this.STATE = estado;
-        this.CREATEDBY = created_by;
+        this.id_responsable = id_responsable;
+        this.estado = estado;
+        this.created_by = created_by;
     }
 }
 __decorate([
@@ -30,7 +30,7 @@ __decorate([
         }
     }),
     __metadata("design:type", Number)
-], bodegas.prototype, "ID", void 0);
+], bodegas.prototype, "id", void 0);
 __decorate([
     Expose({ name: "nombre" }),
     Transform(({ value }) => {
@@ -56,9 +56,9 @@ __decorate([
         }
     }),
     __metadata("design:type", Number)
-], bodegas.prototype, "IDNAME", void 0);
+], bodegas.prototype, "id_responsable", void 0);
 __decorate([
-    Expose({ name: "state" }),
+    Expose({ name: "estado" }),
     Transform(({ value }) => {
         let data = /^[0-9]+$/g.test(value); // a la data le meto la expresion regular  /^[0-9]+$/g.  que  especifica que solo reciba numeros y le paso el valor
         if (data && typeof value == "number") { // acá valido que sea data y tambien tiene que ser de tipo number
@@ -69,7 +69,7 @@ __decorate([
         }
     }),
     __metadata("design:type", Number)
-], bodegas.prototype, "STATE", void 0);
+], bodegas.prototype, "estado", void 0);
 __decorate([
     Expose({ name: "created_by" }),
     Transform(({ value }) => {
@@ -82,4 +82,4 @@ __decorate([
         }
     }),
     __metadata("design:type", Number)
-], bodegas.prototype, "CREATEDBY", void 0);
+], bodegas.prototype, "created_by", void 0);

@@ -42,5 +42,26 @@ appProductos.get("/",(req,res)=>{
     })
 });
 
+//Punto 7
+
+appProductos.post("/",(req,res)=>{
+    const {id, nombre, descripcion, estado} = req.body
+
+    con.query(`
+    INSERT INTO productos (id,nombre,descripcion,estado) VALUES (?,?,?,?)`, 
+    [id,nombre,descripcion,estado],
+    (err,data)=>{
+        if(err){
+            console.log(err)
+            res.status(500).send("Error ejecutando el query")
+        }
+        else {
+            con.query(``)
+        }
+    })
+
+})
+
+
 
 export default appProductos;

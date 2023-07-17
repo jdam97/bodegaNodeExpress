@@ -44,24 +44,73 @@ appProductos.get("/",(req,res)=>{
 
 //Punto 7
 
-appProductos.post("/",(req,res)=>{
-    const {id, nombre, descripcion, estado} = req.body
-
-    con.query(`
-    INSERT INTO productos (id,nombre,descripcion,estado) VALUES (?,?,?,?)`, 
-    [id,nombre,descripcion,estado],
-    (err,data)=>{
-        if(err){
-            console.log(err)
-            res.status(500).send("Error ejecutando el query")
+appProductos.post("/",DtoProductos ,(req, res) => {
+    const { id,nombre,  descripcion,cantidad ,id_inv} = req.body;
+    con.query(
+      "INSERT INTO productos (id, nombre, descripcion) VALUES (?,?, ?)",
+      [id,nombre,  descripcion],
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("Internal Server Error");
+        } else {
+          const  id_producto = id;
+          con.query(
+            "SELECT id FROM bodegas WHERE nombre = ?",
+            ["bodega0"],
+            (err, result) => {
+              if (err) {
+                console.error(err);
+                res.status(500).send("Internal Server Error");
+              } else {
+                const  id_bodega = result[0].id;
+                con.query(
+                  "INSERT INTO inventarios ( id,id_producto,  id_bodega, cantidad) VALUES (?, ?, ?,?)",
+                  [ id_inv,id_producto,  id_bodega, cantidad],
+                  (err) => {
+                    if (err) {
+                      console.error(err);
+                      res.status(500).send("Internal Server Error");
+                    } else {
+                      res.status(200).send("Producto insertado correctamente");
+                    }
+                  }
+                )
+              }
+            }
+          )
         }
-        else {
-            con.query(``)
-        }
-    })
+      }
+    )
+  });
 
-})
+// Punto 8
+appProductos.put("/",DtoProductos,(req,res) => {
+  const { id_producto, cantidad, id_bodegaOrigen, id_bodegaDestino } = req.body;
+  con.query(
+    `SELECT cantidad FROM inventarios WHERE id_producto = ? AND id_bodega = ?`,
+    [id_producto, id_bodegaOrigen],
+    (err, data) => {
+      const cantidadDisponible = data[0].cantidad;
+      if (cantidad > cantidadDisponible) {
+        res.send("No esta disponible esa cantidad");
+      } else {
+        // Restar la cantidad de la bodega de origen
+        con.query(
+          `UPDATE inventarios SET cantidad = cantidad - ? WHERE id_producto = ? AND id_bodega = ?`,
+          [cantidad, id_producto, id_bodegaOrigen]
+        );
 
+        // Sumar la cantidad a la bodega de destino
+        con.query(
+          `UPDATE inventarios SET cantidad = cantidad + ? WHERE id_producto = ? AND id_bodega = ?`,
+          [cantidad, id_producto, id_bodegaDestino]
+        );
+        res.send("Update");
+      }
+    }
+  );
+});
 
 
 export default appProductos;

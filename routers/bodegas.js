@@ -1,7 +1,7 @@
 import { Router } from "express";
 import mysql from "mysql2";
 import dotenv from "dotenv"
-import DtoBodega from "../middlewares/DTObodegas.js";
+import DtoBodega from "../middlewares/DTObodegas.js"; //importo el middleware
 dotenv.config() // para activar la configuracion
 
 const appBodegas = Router();

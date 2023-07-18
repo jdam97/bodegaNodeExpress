@@ -10,8 +10,9 @@ dotenv.config();
 
 const appExpress = express();
 
-appExpress.use(express.json())//middlewall
+appExpress.use(express.json())//middlewall para usar archivos json
 
+//Usar los middleware
 appExpress.use("/bodegas",appBodegas) // acá estoy diciendo que cuando el endpoint sea /bodegas, vaya a bodegas.js y ejecute lo que está en la función
 appExpress.use("/productos",appProductos);
 
